@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Form sinh viên</title>
+
+<style>
+    body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: linear-gradient(135deg, #43cea2, #185a9d);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        background: white;
+        width: 420px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 15px 30px rgba(0,0,0,.25);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: 600;
+        margin-top: 12px;
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 4px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 8px 14px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .save {
+        background: #28a745;
+    }
+
+    .back {
+        background: #6c757d;
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    button:hover, .back:hover {
+        opacity: 0.9;
+    }
+</style>
+</head>
+
+<body>
+<div class="card">
+
+    <h2 th:text="${student.id == null ? '➕ Thêm sinh viên' : '✏️ Sửa sinh viên'}"></h2>
+
+    <!-- KHÔNG ĐỔI action / method -->
+    <form th:action="@{/students/save}" method="post" th:object="${student}">
+
+        <!-- ID ẩn để sửa -->
+        <input type="hidden" th:field="*{id}">
+
+        <label>Tên</label>
+        <input type="text" th:field="*{name}" required>
+
+        <label>Tuổi</label>
+        <input type="number" th:field="*{age}" required>
+
+        <label>Email</label>
+        <input type="email" th:field="*{email}" required>
+
+        <div class="actions">
+            <a class="back" href="/students">⬅ Quay lại</a>
+            <button class="save" type="submit">💾 Lưu</button>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
